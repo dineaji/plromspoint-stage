@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 
 var mongodb = require('Mongodb')
 
-const PORT = process.env.PORT || 3001;
-
 
 var index = require('./routes/index');
 //var users = require('./routes/users');
@@ -50,10 +48,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-app.listen(PORT, ()=>{
-  console.log(`Server started on port: ${PORT}`)
-})
 
 
 module.exports = app;

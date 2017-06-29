@@ -4,7 +4,7 @@
   "scripts": {
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\"",
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "author": "Dinesh Kumar",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "debug-log": "^1.0.1",
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "kerberos": "0.0.23",
@@ -23,4 +24,3 @@
     "supertest": "^3.0.0"
   }
 }
- 
