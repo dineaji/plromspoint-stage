@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	form#test-form(method="post",action="/userDatas",name="userDatas")
+		span Name
+		&nbsp;
+		input(type="text",placeholder = "name",name= "name")
+		br
+		span Gender
+		&nbsp;
+		input(type="text",placeholder = "sex",name= "sex")
+		br
+		span Age
+		&nbsp;
+		input(type="text",placeholder = "age",name= "age")
+		br
+		span Address
+		&nbsp;
+		input(type="text",placeholder = "address",name= "address")
+		br
+		input(type="submit")
+	ul
+		each collection, i in collections
+			li
+				p #{collection.name} , #{collection.sex} , #{collection.age} , #{collection.address}
+
