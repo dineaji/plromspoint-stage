@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
 	})
 });
 
-router.post("/userDatas",function(req,res){
+router.post("/",function(req,res){
 	var mongoclient = mongodb.MongoClient;
 	if(env == "development"){
 		var url = "mongodb://localhost:27017/ppCollections";
