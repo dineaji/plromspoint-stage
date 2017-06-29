@@ -1,6 +1,12 @@
 {
   "name": "pp-poc",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "My first project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dineaji/plromspoint-stage.git"
+  },
   "scripts": {
     "test": "mocha **/*.test.js",
     "test-watch": "nodemon --exec \"npm test\"",
@@ -16,7 +22,8 @@
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "kerberos": "0.0.23",
-    "mongoose": "^4.11.0",
+    "mongodb": "^2.2.29",
+    "mongodb-core": "^2.1.13",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
   },
