@@ -20,8 +20,8 @@ router.get('/', function(req, res, next) {
 	if(env == "development"){
 		var url = "mongodb://localhost:27017/ppCollections";
 	} else{
-		SET MONGOLAB_URI="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";
-		var url = process.env.MONGOLAB_URI
+		var url="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";
+		//var url = process.env.MONGOLAB_URI
 		//var url ="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1"
 	}
 
@@ -54,8 +54,8 @@ router.post("/userDatas",function(req,res){
 	if(env == "development"){
 		var url = "mongodb://localhost:27017/ppCollections";
 	} else{
-		SET MONGOLAB_URI="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";
-		var url = process.env.MONGOLAB_URI
+		var url="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";
+		//var url = process.env.MONGOLAB_URI
 	}
 	mongoclient.connect(url,function(err,db){
 		if(err){
