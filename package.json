@@ -1,10 +1,13 @@
 {
   "name": "pp-poc",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\"",
     "start": "node app.js"
   },
+  "author": "Dinesh Kumar",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
@@ -15,6 +18,9 @@
     "mongoose": "^4.11.0",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "supertest": "^3.0.0"
   }
 }
  
