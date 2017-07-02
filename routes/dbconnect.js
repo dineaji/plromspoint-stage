@@ -17,7 +17,7 @@ var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 router.get('/', function(req, res, next) {
 	console.log(env)
 	var mongoclient = mongodb.MongoClient;
-	if(env == "development"){
+	if(env == "sdevelopment"){
 		var url = "mongodb://localhost:27017/ppCollections";
 	} else{
 		var url="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";
@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
 
 router.post("/",function(req,res){
 	var mongoclient = mongodb.MongoClient;
-	if(env == "development"){
+	if(env == "sdevelopment"){
 		var url = "mongodb://localhost:27017/ppCollections";
 	} else{
 		var url="mongodb://dineaji:27smss106@ds127801.mlab.com:27801/plromspointv1";

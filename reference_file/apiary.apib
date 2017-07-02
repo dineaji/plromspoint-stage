@@ -1,0 +1,278 @@
+FORMAT: 1A
+HOST: https://dev-hotwheelsendlessracer.herokuapp.com/HWEndlessRacer
+
+# HW Endless racer
+This following APIs records and retrieve game statistics for each user. 
+
+## Get Authentication Token [/oauthtoken]
+
+### App Authentication  [POST]
+Every request that your application sends to the Mattel API needs to identify your application. You can use the API key you get when defining your project. Whenever the app initialize, this API method needs to be called to generate the access token for that session. You should use this access token to make any API calls.
+
+
++ Request (application/x-www-form-urlencoded)
+
+    clientId=random 16 digit number
+
+    + Headers
+    
+                x-signature: hashed value for random 16 digit number using secret code
+
+    + Body
+
+            clientId=random 16 digit number
+
++ Response 200 (text/plain)
+    + Attributes 
+        + text (string, required) - `Generated Token`
+        
++ Response 401 (text/plain)
+    + Attributes 
+        + text (string, required) - `Invalid Authorization`
+
+## Get User State [/getCurrentState]
+
+### Get current user state [POST]
+Retrieve current state for user with earning, badges, and environment details
+
++ Request (application/json)
+
+    + Headers
+    
+                x-access-token: Token received in auth poll
+                
+
+    + Body
+
+            {"user": "userId"}
+
++ Response 401 (text/plain)
+    + Attributes 
+        + text (string, required) - `Invalid Request`
+        
++ Response 417 (text/plain)
+    + Attributes 
+        + text (string, required) - `Must provide User Id`
+
++ Response 204  (text/plain)
+    + Attributes 
+        + text (string, required) - `No records found`
+        
++ Response 200 (application/json)
+
+        {
+            "user": "userId",
+            "coins": 200,
+            "badges": [
+                {
+                    "badgeId": "bdg12",
+                    "title": "star",
+                    "category": "10 car collect",
+                    "imageUrl": "http://www.hotwheels.com/badges/star.png",
+                    "earnedDate": "2016-08-18T12:34:13.123Z"
+                }, {
+                    "badgeId": "bdg23",
+                    "title": "tri-star",
+                    "category": "",
+                    "imageUrl": "http://www.hotwheels.com/badges/tri-star.png",
+                    "earnedDate": "2016-08-18T12:34:13.123Z"
+                }
+            ],
+            "games": [
+                {
+                    "gameid":"endlessrace",
+                    "cars": [
+                        {
+                            "carId": "CR213",
+                            "powerups": [
+                                {
+                                    "id": "Health",
+                                    "level": 5
+                                }, {
+                                    "id": "CoinMagnet",
+                                    "level": 3
+                                }
+                            ]
+                        }, {
+                            "carId": "CR213423",
+                            "powerups": [
+                                {
+                                    "id": "Invincibility",
+                                    "level": 2
+                                }, {
+                                    "id": "SpeedBoost",
+                                    "level": 3
+                                }
+                            ]
+                        }, {
+                            "carId": "CR098",
+                            "powerups": [
+                                {
+                                    "id": "Health",
+                                "level": 1
+                                }, {
+                                    "id": "Invincibility",
+                                    "level": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "environment": [
+                        {
+                            "name": "ENV98",
+                            "bestDist": 15
+                        }, {
+                            "name": "ENV8979",
+                            "bestDist": 35
+                        }
+                    ]
+                }
+            ]
+        }
+
+## Get User Currency [/getCurrencyBalance]
+
+### Get user currency balance [POST]
+Retrieve user's current currency balance
+
++ Request (application/json)
+
+    + Headers
+    
+                x-access-token: Token received in auth poll
+                
+
+    + Body
+
+            {"user": "userId"}
+
++ Response 401 (text/plain)
+    + Attributes 
+        + text (string, required) - `Invalid Request`
+        
++ Response 417 (text/plain)
+    + Attributes 
+        + text (string, required) - `Must provide User Id`
+
++ Response 204  (text/plain)
+    + Attributes 
+        + text (string, required) - `No records found`
+        
++ Response 200 (application/json)
+
+        {
+            "user": "userId",
+            "coins": 200
+        }
+
+## Record User Earnings [/recordEarnings]
+
+### Add or update earnings [POST]
+
+Add or update user earnings either on game exit or after redemption.
+
++ Request (application/json)
+
+    + Headers
+    
+                x-access-token: Token received in auth poll
+                
+    + Body
+
+            {
+                "user": "userId",
+                "coins": 200,
+                "badges": [
+                    {
+                        "badgeId": "bdg12",
+                        "title": "star",
+                        "category": "10 car collect",
+                        "imageUrl": "http://www.hotwheels.com/badges/star.png",
+                        "earnedDate": "2016-08-18T12:34:13.123Z"
+                    }, {
+                        "badgeId": "bdg23",
+                        "title": "tri-star",
+                        "category": "",Car
+                        "imageUrl": "http://www.hotwheels.com/badges/tri-star.png",
+                        "earnedDate": "2016-08-18T12:34:13.123Z"
+                    }
+                ],
+                "games": [
+                    {
+                        "gameid":"endlessrace",
+                        "cars": [
+                            {
+                                "carId": "CR213",
+                                "powerups": [
+                                    {
+                                        "id": "powerupname1",
+                                        "level": 5
+                                    }, {
+                                        "id": "powerupname2",
+                                        "level": 3
+                                    }
+                                ]
+                            }, {
+                                "carId": "CR098",
+                                "powerups": []
+                            }
+                        ]
+                    }
+                ]
+            }
+
++ Response 401 (text/plain)
+    + Attributes 
+        + text (string, required) - `Invalid Request`
+        
++ Response 417 (text/plain)
+    + Attributes 
+        + text (string, required) - `Must provide proper earning details`
+
++ Response 200 (application/text)
+    + Attributes 
+        + text (string, required) - `Earnings updated`
+
+## Record User Environment [/unlockEnvironment]
+
+### Add or update  unlocked environments [POST]
+
+Add or update environment details user has unlocked along with best distance on game exit
+
++ Request (application/json)
+
+    + Headers
+    
+                x-access-token: Token received in auth poll
+                
+    + Body
+
+            {
+                "user": "userId",
+                "games": [
+                    {
+                        "gameid":"endlessrace",
+                        "environment": [
+                            {
+                                "name": "ENV98",
+                                "bestDist": 15
+                            }, {
+                                "name": "ENV8979",
+                                "bestDist": 35
+                            }
+                        ]
+                    }
+                ]
+            }
+
++ Response 401 (text/plain)
+    + Attributes 
+        + text (string, required) - `Invalid Request`
+        
++ Response 417 (text/plain)
+    + Attributes 
+        + text (string, required) - `Must provide proper environment detials`
+
++ Response 200 (application/text)
+    + Attributes 
+        + text (string, required) - `Environment details updated`
